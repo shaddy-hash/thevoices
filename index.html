@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>60 Voices for Robin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0b08;
+      --bg-card: rgba(20,16,12,0.55);
+      --gold: rgba(210,175,80,0.95);
+      --gold-dim: rgba(210,175,80,0.45);
+      --gold-faint: rgba(210,175,80,0.22);
+      --gold-trace: rgba(210,175,80,0.10);
+      --cream: #FAF6EE;
+      --cream-soft: rgba(250,246,238,0.85);
+      --cream-mid: rgba(250,246,238,0.60);
+      --cream-dim: rgba(250,246,238,0.35);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--cream); }
+
+    .frame {
+      position: fixed; inset: 24px; z-index: 50;
+      border: 1px solid var(--gold-faint); pointer-events: none;
+    }
+    .frame::after {
+      content: ''; position: absolute; inset: 5px;
+      border: 1px solid var(--gold-trace);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 70px 48px 120px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 0 70px;
+    }
+    .eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(0.62rem, 1.5vw, 0.76rem);
+      font-weight: 300; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 11vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+    }
+    .hero-title .sixty {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: clamp(2.2rem, 6.5vw, 4.5rem);
+      margin-top: 0.15em;
+      letter-spacing: 0;
+    }
+
+    .rule {
+      display: flex; align-items: center; gap: 0.9rem;
+      margin: 2.2rem auto 1.8rem; width: min(340px, 78vw);
+    }
+    .rule-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+    .rule-diamond {
+      width: 5px; height: 5px; background: var(--gold);
+      transform: rotate(45deg); flex-shrink: 0;
+    }
+
+    .hero-meta {
+      font-family: 'Lato', sans-serif;
+      font-size: clamp(0.72rem, 1.6vw, 0.85rem);
+      font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--cream-mid);
+      line-height: 1.9;
+    }
+    .hero-meta strong { color: var(--cream-soft); font-weight: 400; }
+
+    .intro {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 30px 0 0;
+      text-align: center;
+    }
+    .intro p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--cream-soft);
+      margin-bottom: 1.1rem;
+    }
+    .intro p:last-child {
+      font-family: 'Lato', sans-serif;
+      font-style: normal;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      color: var(--cream-mid);
+    }
+
+    .add-voice {
+      text-align: center;
+      margin: 55px 0 25px;
+    }
+    .add-voice-link {
+      display: inline-block;
+      padding: 14px 36px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      transition: all 0.4s ease;
+    }
+    .add-voice-link:hover {
+      color: var(--bg);
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .add-voice-link .arrow {
+      display: inline-block;
+      margin-left: 0.8rem;
+      transition: transform 0.4s ease;
+    }
+    .add-voice-link:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    .section-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem;
+      margin: 70px auto 50px;
+      max-width: 600px;
+    }
+    .section-divider .line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+    .section-divider .label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem; font-weight: 300;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .voices {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .voice {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-trace);
+      padding: 48px;
+      position: relative;
+      transition: border-color 0.6s ease;
+    }
+    .voice:hover {
+      border-color: var(--gold-faint);
+    }
+
+    .voice-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--gold-trace);
+    }
+
+    .voice-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2.6vw, 1.85rem);
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .voice-relation {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      color: var(--gold);
+    }
+    .voice-relation::before { content: "· "; color: var(--gold-dim); margin-right: 0.2rem; }
+
+    .voice-body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.5vw, 1.08rem);
+      line-height: 1.85;
+      color: var(--cream-soft);
+    }
+    .voice-body p { margin-bottom: 1.1rem; }
+    .voice-body p:last-child { margin-bottom: 0; }
+
+    .voice-photos {
+      margin-top: 1.8rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .voice-photos img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      filter: saturate(0.92) brightness(0.92);
+      transition: filter 0.5s ease, transform 0.6s ease;
+      cursor: pointer;
+    }
+    .voice-photos img:hover {
+      filter: saturate(1.05) brightness(1.02);
+      transform: scale(1.015);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(8, 6, 4, 0.94);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 100px;
+      padding-top: 50px;
+      border-top: 1px solid var(--gold-trace);
+    }
+    .footer .rule { margin: 0 auto 2rem; }
+    .footer p {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 0.8rem;
+    }
+    .footer p.signature {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--cream-mid);
+    }
+
+    @media (max-width: 760px) {
+      .frame { inset: 12px; }
+      .container { padding: 50px 24px 80px; }
+      .hero { padding: 30px 0 50px; }
+      .voice { padding: 30px 24px; }
+      .voice-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .voice-relation::before { display: none; }
+      .voice-photos { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .voice-photos { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame" aria-hidden="true"></div>
+
+  <div class="container">
+    <header class="hero">
+      <p class="eyebrow">A gift for Robin · June 1, 2026</p>
+      <h1 class="hero-title">
+        60 Voices
+        <span class="sixty">for Robin</span>
+      </h1>
+      <div class="rule">
+        <div class="rule-line"></div>
+        <div class="rule-diamond"></div>
+        <div class="rule-line"></div>
+      </div>
+      <p class="hero-meta">
+        <strong>66 voices</strong> from the people who love her<br>
+        Gathered for her sixtieth birthday
+      </p>
+
+      <div class="intro">
+        <p>
+          Robin turned 60 on June 1, 2026. These are the words of the people who love her —
+          family, friends, the ones who've known her forever and the ones she's only just met.
+        </p>
+        <p>
+          Each voice you read here will also become part of something else: a painted portrait
+          of Robin made from these words, gathered as raw material for the artist.
+        </p>
+      </div>
+
+      <div class="add-voice">
+        <a href="https://voices.robin60.com" class="add-voice-link">
+          Add Your Voice
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="section-divider">
+      <div class="line"></div>
+      <div class="label">The Voices</div>
+      <div class="line"></div>
+    </div>
+
+    <main class="voices" id="voicesContainer">
+      <!-- voices rendered by JS -->
+    </main>
+
+    <footer class="footer">
+      <div class="rule">
+        <div class="rule-line"></div>
+        <div class="rule-diamond"></div>
+        <div class="rule-line"></div>
+      </div>
+      <p class="signature">With love, from everyone who knows how extraordinary you are</p>
+      <p style="margin-top: 2rem;">Robin's 60th · June 1, 2026</p>
+    </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    const VOICES = [
+  {
+    "name": "Andrew and Angie Norman",
+    "relation": "Family friends",
+    "note": "Robin has always struck us as someone with a rare combination of wisdom and joy, a person with a sparkle in her eyes that never seems to fade. She is adventurous, endlessly curious, and full of layers. Time and again, she throws herself into new experiences with a bravery that appears effortless, though I'm sure it isn't always so.\r\n\r\nShe may not fully realize how much that willingness to try new things has inspired the people around her, including our family. Watching Robin embrace life has encouraged us to take chances, learn new things, and be a little bolder ourselves.\r\n\r\nUltimately, Robin makes everyone around her better. She strengthens her community, lifts up her friends, and has raised three incredible young men who continue to spread her positivity, kindness, and energy into the world",
+    "photos": []
+  },
+  {
+    "name": "Kate Picard",
+    "relation": "Aaron is my cousin",
+    "note": "Robin! \r\nYou're quiet heart shines through every moment I've spent with you. You're always ready to laugh and you share that joy with those around you effortlessly. It is inspiring to watch you go through the stages of being a mom, from little silly boys to grown up men. It gives me hope that I will have half as much grace as you. I just love you and so glad you are family and I couldn't imagine it any other way. With great love in our hearts, we say, \"Hello to 60, cause girl you lookin' 40!\"",
+    "photos": []
+  },
+  {
+    "name": "Stephan Grot",
+    "relation": "Late-life long friend",
+    "note": "Someone who can seem merely sweet, kind, generous, and maybe a little unassuming to those who barely know her, but getting to know her reveals a mischievous lust for life. A cowgirl beauty queen who still keeps miniature cutouts from those days and remains Miss Congeniality, with a winning smile and the ability to rope a bronco. Someone who seduced the younger man she managed at work, married him, and raised a child who's now an Olympic hopeful. Someone who flies all the way to California just because there's a concert we want to see together. Someone with a celebrity hall pass list that I think I'm now on—for both her and Aaron. Someone I hope to ride motorcycles across a country with someday, and one of the few people I think would actually do it. Looking forward to future adventures!",
+    "photos": [
+      "Stephan_Grot_01.jpg"
+    ]
+  },
+  {
+    "name": "Mike and Sue Toohey",
+    "relation": "Friends",
+    "note": "Robin, you're an amazing person. We cherish your friendship and are in awe of the many ways you have left your mark. You're a fantastic mother, wife and business person. How cool that you and Aaron are able to make this big splash for your celebration! Can't wait to see what you have planned next. With love, Mike and Sue",
+    "photos": []
+  },
+  {
+    "name": "Paul and Quinn Kulik",
+    "relation": "Longtime friend",
+    "note": "hey Robin! Have the most amazing time in Bali and all the other adventures yet to come. Happy birthday.",
+    "photos": []
+  },
+  {
+    "name": "Emily Moody",
+    "relation": "friend",
+    "note": "I’m not sure I’ve ever seen a human smile as much as Robin. She smiles with her whole body- her eyes, her open arms, her voice. I love that I can closes my eyes and see her laughing, exuberant and gentle all at once. What a gift she is to all who are lucky enough to share her warmth.",
+    "photos": []
+  },
+  {
+    "name": "Craig Moody",
+    "relation": "Leadership Omaha",
+    "note": "Robin, I’m sitting at The Bay on a Saturday morning watching our community get closer, better, more vibrant. I think it’s a perfect metaphor for how we met…as trouble-making do holders in LO. \r\n\r\nI really appreciate and value that experience as our grounding connection. Existing to make the world better. \r\n\r\nI hope your next decade is a wonderful journey! \r\n\r\nLove, \r\nCraig",
+    "photos": [
+      "Craig_Moody_01.jpg"
+    ]
+  },
+  {
+    "name": "Zach Shaddy",
+    "relation": "Son",
+    "note": "Happy birthday, Mother! Words can’t describe how much you’ve meant to me in my life. Thank you for all of your sacrifices, unconditional love, and support of me chasing my dreams. My brain can’t even begin to think of where I’d be without you. You have an energy and soul that is very rare in this world, and you inspire me everyday to be a kinder person - “Fill somebody’s bucket today.” I am incredibly grateful for every memory we’ve shared and for everything you’ve done to help me become the person I am today. I hope this birthday reminds you of how loved and appreciated you are by everyone around you. Here’s to celebrating 60 amazing years, I love you much!",
+    "photos": [
+      "Zach_Shaddy_01.jpg",
+      "Zach_Shaddy_02.jpg",
+      "Zach_Shaddy_03.jpg"
+    ]
+  },
+  {
+    "name": "Julie Bear",
+    "relation": "Longtime friend",
+    "note": "Robin, My wish for you is that this decade brings you all the happiness you share with the world around you. You light up the room the moment you enter and I am so grateful to be your friend.  Let’s raise a glass to celebrate your 60th trip around the sun and many more! Love you my friend!",
+    "photos": []
+  },
+  {
+    "name": "Karen Borchert",
+    "relation": "Travel, work, dinners, joy?",
+    "note": "I met Robin because I gave a talk at Flywheel on the topic of Abundance and five minutes after it, Aaron said \"you need to meet my wife Robin.\"\n\nThe premise of the talk was this: there are two ways to operate in the world: one in which you believe you are limited by the resources and opportunities you can see in your current view—a mindset of scarcity. And then there's a mindset in which you ask questions like \"what if we had to?\" and \"how could we make this happen?\" and \"what's the best that could happen?\" That's the mindset of abundance.\n\nAbundance makes everything feel possible. Mindset defines action, and action begets results, and our results reinforce our future mindset. And so it multiplies.\n\nRobin's gift in the world is to think in abundance, about a world where anyone can be anything they want, find love where it wasn't likely, build a family that lives the dream, and enjoys simple pleasures and grand adventures in equal measure.\n\nAnd so, here we are, in a treehouse in Bali:\nAn abundance of love and joy\nAn abundance of celebration\nAn abundance of deep and true friendship\nAn abundance of connection\nMemories to last us until forever, or the next trip Robin dreams up.\n\nThe word I would use to describe Robin today, and my wish for you for the next beautiful decade my love, is abundance.\n\nBirthdays after 40 typically operate in limitations and scarcity: we assume a scarcity of health, of work, of energy available. But if we know Robin well we know this: age is and will never be a limitation, and there is no scarcity here. There is great abundance.\n\nAn abundance of joy, travel, music, dancing, love. An abundance of decisions made for the good you see in the world, and an abundance of choices made for the good you see in yourself.\n\nThank you for so joyfully, fully, and totally embracing your humans (and pets! And my kids! And literally everyone!) with perfect abundance. My wish today is actually a wish for the rest of us — that we return that abundance to you. Happy birthday, dearest radiant one!",
+    "photos": [
+      "Karen_Borchert_01.jpg",
+      "Karen_Borchert_02.jpg",
+      "Karen_Borchert_03.jpg"
+    ]
+  },
+  {
+    "name": "Fynn",
+    "relation": "Friend",
+    "note": "GBR: Go Big Robin",
+    "photos": [
+      "Fynn_01.jpg"
+    ]
+  },
+  {
+    "name": "Dusty Davidson",
+    "relation": "Met Robin through Aaron",
+    "note": "One of my earliest memories of our friendship and adventures was deciding on a whim to travel to Chicago for a fancy dinner either mere hours notice. Little did I know that would set in motion decades of travel, fun, friendship and memory making! Cheers to 60 and I can’t wait for what travel and joy lies ahead!",
+    "photos": [
+      "Dusty_Davidson_01.jpg",
+      "Dusty_Davidson_02.jpg"
+    ]
+  },
+  {
+    "name": "Bob",
+    "relation": "Worked with her for a number of years.",
+    "note": "Hi Robin, \r\n\r\nIt has been fun to watch you grow through your life. You were so very young when we met, seeing you build a life with Aaron has been wonderful.  It does make me feel very, very old to know you are turning 60 but you will do it with style.  You’ve always been a very good hearted person and focused on doing and being your best. \r\n\r\nHappy Birthday! \r\nBob",
+    "photos": []
+  },
+  {
+    "name": "John Paul Ashford",
+    "relation": "Former Lover ❤️",
+    "note": "You bring an energy I have never experienced.  You are chill, curious and have a love for your people that is so genuine.  I am lucky to have you in my life!  You also love my dirty jokes.  Thank you for letting me be one of your people!!",
+    "photos": [
+      "John_Paul_Ashford_01.jpg",
+      "John_Paul_Ashford_02.jpg"
+    ]
+  },
+  {
+    "name": "Amy Martinez",
+    "relation": "Past house keeper",
+    "note": "I don’t know where to begin. Robin you have such a beautiful soul. One of the most amazing women I know. You’ve always been so supportive and understanding. I can’t wait to see the day where you’re retired. I know you want to be laid out in the sun on a beach somewhere. You deserve it. I wish you nothing but joy and happiness in the years ahead. I love you 🤍",
+    "photos": []
+  },
+  {
+    "name": "James Edmonds",
+    "relation": "fanboy",
+    "note": "You are an incredible woman, Robin.  Amazing Mother, impeccable Wife, entrepreneur, philanthropist, etc. You get the idea, I'm a big fan.\r\n\r\nOur relationship really came to be through Aaron but I am absolutely better for it.  One of those essential pillars of friendship. I can always steal a quiet moment with you to share a sarcastic comment.\r\n\r\nThere was a time that I marveled at you & Aaron & how you were each absolutely dedicated to each other.  Completely in love & best friends at the same time. Partners in every way.  For a long time, it was only something I could aspire to but, thankfully you were there on the ground floor when I did find that for myself. Your words of understanding & encouragement held such gravitas, they were instrumental at a pivotal time in my life.  Love you, Robin!",
+    "photos": [
+      "James_Edmonds_01.jpg",
+      "James_Edmonds_02.jpg",
+      "James_Edmonds_03.jpg"
+    ]
+  },
+  {
+    "name": "Emily Brewer",
+    "relation": "Friend and neighbor",
+    "note": "Robin,\r\n\r\nYou are one of the kindest, sweetest people I have ever met. You have a zest for life that is truly inspiring to witness.\r\n\r\nWe only get one life on this little floating rock, and you live it so beautifully with enthusiasm, curiosity, and heart. Your love of adventure is a joy to watch, but your love for others is where the real magic lies.\r\n\r\nYou have a way of making people feel seen and welcomed and cared for. You’ve got a ray of sunshine for a heart, and it shines on everyone lucky enough to know you. The world feels brighter because you’re in it.\r\n\r\nThis little floating rock has carried you around the sun sixty times now, and I hope each new trip brings more adventures, more laughter, and many reasons to smile.\r\n\r\nHappiest Birthday, Robin!\n\nHappiest birthday, Robin! You are so, so loved 💕",
+    "photos": []
+  },
+  {
+    "name": "Annette Smith",
+    "relation": "Robin is a friend",
+    "note": "Dear Robin, \r\nYou are a treasured new friend. Spending time with you is truly joyful! You are open, engaging, interesting and interested. I love the way you bring new friends into your world with open arms and generosity.  Your willingness to share all you’ve learned from living life enriches all of our lives. Thanks for spreading the joy! You are truly an inspiring person! \r\nI hope you have a wonderful birthday and the year ahead is full of friends, family, fun and adventure! \r\nWith much love,\r\nAnnette",
+    "photos": []
+  },
+  {
+    "name": "Julie DeWitt & Andy Stoll",
+    "relation": "Originally through Aaron, through Maha Festival",
+    "note": "We've shared memorable meals, long conversations, apple pie making, community events, music festivals, an eclipse, a love of dogs (even Andy), jaw dropping trampolining and diving videos, and now an international adventure! You have a warmth, care, and realness that invites people to be themselves. You're curious about the world, which you embrace through travel, trying new things, and helping the community. And you're curious about people  — who they are and who they want to be. One of the things we admire most about you is your willingness to keep evolving and following what feels true. You remind us that pursuing new dreams has no age limit. May the next decade bring dreams realized, epic meals, dog kisses, more fun with good friends, and a few jaw dropping moments. Love, Julie & Andy",
+    "photos": [
+      "Julie_DeWitt_Andy_Stoll_01.jpg",
+      "Julie_DeWitt_Andy_Stoll_02.jpg",
+      "Julie_DeWitt_Andy_Stoll_03.jpg"
+    ]
+  },
+  {
+    "name": "Nik Fackler",
+    "relation": "friend",
+    "note": "Robin. You have been such surprising new friend in my life as I entered into parenthood. You have been such a kind and inviting soul and every time I see a dinner on the books. I get excited because I know I can be myself around you. Which is an oasis.",
+    "photos": []
+  },
+  {
+    "name": "Lauren Martin",
+    "relation": "Good ol' Maha days",
+    "note": "Robin, it's been fun to think back on my earliest memories of you. \r\n\r\nWith Maha as our initial connection, I was lucky to see you in action in those earliest days as wife and mother, before I was either myself. You were steady, engaged, and dedicated in ways that I've always admired. \r\n\r\nAnd some 15 years later (time is wild!), as I'm well into marriage and motherhood, I continue to admire who you are, now with the clarity of recognizing the incredible woman beneath all the roles you hold. Happiest 60th to a true rockstar!",
+    "photos": []
+  },
+  {
+    "name": "Becky Korth",
+    "relation": "Cousin",
+    "note": "Happy 60th birthday to my fellow Gemini! \r\nYou have such a warm, open, non judgemental, positive energy about you.  It makes people gravitate toward you and want to be a part of it.  As I am writing this I can see your smile and hear your laugh. I am so glad you are a part of our family, although I'm sure some days you question that choice 😜.  I am excited to see what your 60th year brings and I am sending good vibes your way as you travel along your journey of self discovery!    \r\nLove you Robin!",
+    "photos": [
+      "Becky_Korth_01.jpg"
+    ]
+  },
+  {
+    "name": "Paul Smith",
+    "relation": "Gotten to know Robin after first meeting Aaron.",
+    "note": "Robin - the first time I met you was at a random event in Little Bohemia. I was impressed at the way in with you engaged. You were focused and direct. No distractions. Just a clear focus on our interaction. Turns out that’s just you. It’s a delightful thing in this distracted day and age!\r\n\r\nI wish you a happy birthday! As one who is well past the 60 mark, I can tell you that you have wonderful things to look forward to!",
+    "photos": []
+  },
+  {
+    "name": "Drew Davies",
+    "relation": "Omaha friend",
+    "note": "For me, Robin has always been a beacon of positivity — not the vapid, Pollyanna kind, but grounded and honest. She doesn’t thoughtlessly tell you everything will be okay; her presence simply makes you feel, deep down, that it will.",
+    "photos": []
+  },
+  {
+    "name": "Lionel Reilly",
+    "relation": "Friend",
+    "note": "HAPPY BIRTHDAY.   \r\nEnjoy your Special Days celebrating.  When you are available I'm ready fa wine and charcuterie event. \r\nMy 60th was a huge friends and family party.  Great memories.   \r\nTake advantage of Aaron spoiling you.  You deserve it.\r\nHBD.  Lionel",
+    "photos": []
+  },
+  {
+    "name": "Brent and Kari Swift",
+    "relation": "Good friends",
+    "note": "Happy 60th birthday Robin! Brent and I value your friendship, no matter how often or little we see each other. We hope you have a wonderful year with health, happiness, and love with friends and family. We have many memories Halloween parties, Virgin Gorda, you guys coming to watch Mollee at LSU, and us going to watch Zach dive. Hoping you have a wonderful 60th birthday trip. We love you very much!",
+    "photos": []
+  },
+  {
+    "name": "Chas Ortman",
+    "relation": "I am one of her Merry Men",
+    "note": "Hi Robin, it’s hard to believe but we have been friends for over 30 years. Just think what my live would be if you didn’t come to work for Mandolfo’s. You are the first person I have known that has my birthday. That alone gives us that special bond. I would not have married the love of my life. After months of asking you if you talked to Laurie to set up a kinda blind date you finally gave me her email address and the fireworks began. I will always love you for that effort you put in. That email was a life changer.I would like to wish you the Happiest 60th birthday and looking forward to getting together and catching up. \r\n\r\nChas",
+    "photos": []
+  },
+  {
+    "name": "Laurie Ortman",
+    "relation": "Met in college",
+    "note": "So blessed to have Robin in my life.  We quickly connected and our friendship has been a significant part of my life.  She is such an amazing woman and turning 60 together this year is wonderful part of our journey together.  Sending my love and I hope her birthday is amazing.",
+    "photos": []
+  },
+  {
+    "name": "Andrew Seaman",
+    "relation": "family / cousin",
+    "note": "When I think of Robin I think of her smile and I think of her laughing. She's carries a joy within her that seems to consider all the various facts of life, in all their depths, and yet she still chooses joy. She models that elegantly.",
+    "photos": [
+      "Andrew_Seaman_01.jpg",
+      "Andrew_Seaman_02.jpg"
+    ]
+  },
+  {
+    "name": "Patty Malone",
+    "relation": "Omaha Connections",
+    "note": "What fun you are Robin! I cherish the time we have spent together and know you would NEVER be able to get this close to a Hawaiian sea turtle today.  Happy Birthday my friend - with love and aloha to you on your 60th ❤️",
+    "photos": [
+      "Patty_Malone_01.jpg",
+      "Patty_Malone_02.jpg"
+    ]
+  },
+  {
+    "name": "Kat Fackler",
+    "relation": "",
+    "note": "Robin is one of the kindest people I know, like truly and genuinely kind, deep from her core. She is someone who wants the best for people around her, and sees the best in people around her. She is warmth to me. I am not sure how that translates in color, but whenever I see her or think of her I think of her smile and warmth and laughter. I think of her inviting nature: inviting of friendship, joy, conversation, a shared meal, a new adventure, a cool dance idea, dreams for the future, and being exactly who you are. She has a calmness and coolness also that makes me think everything is alright. I always imagine she moves through her every day, and life in general, as if she knows exactly where she should be and what she should be doing at each moment. Robin = Light",
+    "photos": [
+      "Kat_Fackler_01.jpg"
+    ]
+  },
+  {
+    "name": "Stephen Pedersen",
+    "relation": "friend",
+    "note": "Sweet sweet Robin. Congratulations on your glorious ascendance to Tier 6. You are such a sweet, insightful and calm presence and energy whenever we're around you. Aaron is oh so lucky to orbit you. Have a most excellent 60th Birthday and see you soon! \r\n\r\nLove,\r\nStephen and Emily",
+    "photos": []
+  },
+  {
+    "name": "Jill & Cynthia",
+    "relation": "Sisters in law",
+    "note": "Robin… Robin is everyone’s cheerleader, always raising others up. I remember, after coming out to her and Aaron, she said that it was going to be “the year of Jill” and I was going to find my someone…and that kind of support and faith and confidence meant so much to me and has stuck with me over the years. It took a few more years than she predicted to find my someone, but that is a reflection on me, not her, lol. \r\nWe look for Robin to be as passionate a cheerleader for herself as she has been for others, and we are right there with her as part of her cheer squad. May “The Year of Robin” commence and bring growth and inspiration and love. We so love and appreciate you, for you, Robin!!",
+    "photos": [
+      "Jill_Cynthia_01.jpg",
+      "Jill_Cynthia_02.jpg"
+    ]
+  },
+  {
+    "name": "Mandy Helwig",
+    "relation": "She’s my aunt.",
+    "note": "Happy Birthday, Robin! I hope it’s the start of a magical next chapter for you. I have looked up to you my whole life. I so admire you and your joie de vivre! You have always been a role model, confidante, and friend to me. I’m so grateful for your love, light, and laughter. I wish you boundless joy, adventure, and love in the decades ahead! Love you!",
+    "photos": [
+      "Mandy_Helwig_01.jpg"
+    ]
+  },
+  {
+    "name": "Merry Muhsman",
+    "relation": "coworker",
+    "note": "How do I even begin to describe Robin? I have known her for decades. She's been there for some of the best times of my life, and for some of the worst times. I have always known that she was special. There are people that simply glow with love and peace and being around them makes you believe life is grand and wonderful. When I lost my job after two decades (the same place I met Robin), she was one of my first calls. Not because I needed a job, but I needed to hear her voice. Needed to know what was next. And she had the answer. She said do the things you never got to do. And I did. Robin is one of the wisest people I know, and she is a strategist, a learner and I am so blessed to call her my friend. Love you!",
+    "photos": [
+      "Merry_Muhsman_01.jpg",
+      "Merry_Muhsman_02.jpg"
+    ]
+  },
+  {
+    "name": "Jackie Greene",
+    "relation": "childhood friend",
+    "note": "Who would’ve thought that sitting next to each other in 8th grade band would turn into a friendship that would last all these years?!\r\nRobin, my kind and generous friend, my fellow Gemini, endlessly curious in all the best ways… you’ve always had a special spark. I admire the way you embrace life and all it has to offer. You never stand still for long — always ready for a new adventure, a fun journey, or an experience that makes life richer and more meaningful.\r\nThrough all these years and all the changes life brings, I appreciate that our friendship has stayed filled with laughter, great conversations, and of course, many glasses of wine while we catch up on life and everything in between.\r\nHappy Birthday, dear Robin. Cheers to you, to friendship, and to many more adventures ahead!",
+    "photos": []
+  },
+  {
+    "name": "Elisa Davies",
+    "relation": "Admirer",
+    "note": "Sixty looks beautiful on you.\r\n\r\nBecause you have spent your years collecting laughter instead of worry, music instead of chatter.\r\n\r\nYou move through life as someone who understands joy is not something for later. Time has wrinkled or leathered you.\r\n\r\nCheers to the light you see and shine.",
+    "photos": []
+  },
+  {
+    "name": "Taylor Borchert",
+    "relation": "Omaha!",
+    "note": "Robin, I can’t think of a time that I’ve seen you and I haven’t immediately given you a hug, I love our crazy adventures and belly laughs with your amazing family. Thanks for welcoming my family into yours!",
+    "photos": [
+      "Taylor_Borchert_01.jpg",
+      "Taylor_Borchert_02.jpg",
+      "Taylor_Borchert_03.jpg"
+    ]
+  },
+  {
+    "name": "Alex",
+    "relation": "Son",
+    "note": "The best mother we could've asked for. Your kindness, grace, goodness, warmth, and humor shape us all. Forever grateful for the wonderful years you've had, and exited for the many to come. Love you very much, happy birthday!",
+    "photos": [
+      "Alex_01.jpg",
+      "Alex_02.jpg",
+      "Alex_03.jpg"
+    ]
+  },
+  {
+    "name": "Caryn Stichler",
+    "relation": "I met her at Sergeants Pet Care.",
+    "note": "I love Robins approach to life, work, family and friends.  One of my fondest memories was our co-training Nellie, a future guide dog in training.   It was a lot of fun and gave us both a break from all that puppy energy and cuteness. To share this responsibility. When Nellie was no longer eligible a Leader Dog.  Robin became Nellie’s Dog Mom ever and Nellie in all her sweetness could not be such as devouring Zach’s entire birthday cake green frosting and all. Robin has a beautiful soul and has so many ideas on how to find purpose and focuses on self improvement and maybe that’s why she seems perfect as she is.  Happy birthday Robin, you will rock this decade!",
+    "photos": []
+  },
+  {
+    "name": "Trevor & Kendal Davis",
+    "relation": "friend",
+    "note": "Happy 60th to Robin — the woman who, at 3am in a NYC Korean BBQ joint, calmly helped spoon-feed my wife Kendal like it was the most normal thing in the world. That's not friendship. That's sainthood. Here's to 60 more years of taking care of the rest of us.",
+    "photos": [
+      "Trevor_Kendal_Davis_01.png",
+      "Trevor_Kendal_Davis_02.png"
+    ]
+  },
+  {
+    "name": "Rachel Giles",
+    "relation": "Mobbin’ Robin, boss, pickleball partner, anotha motha",
+    "note": "Goodness gracious happy 60th what a trip! And I don’t just mean the trip of a lifetime you find yourself on! I’ve had such a blast working with you and so many laughs (some tears too) shared along the way. Cheers to many more birthdays to come!!",
+    "photos": [
+      "Rachel_Giles_01.jpg",
+      "Rachel_Giles_02.jpg",
+      "Rachel_Giles_03.jpg"
+    ]
+  },
+  {
+    "name": "HaiLee Ofe",
+    "relation": "daughter-in-law",
+    "note": "Robin, I truly couldn’t ask for a better mother in law. You are one of the most supportive people in my life and always want the best for those you love. I know that your 60th is going to be your best year yet and I can’t wait to see all of the amazing travels yet to come and to share many more meals, laughs, glasses of wine and of course all the caviar we can get our hands on. I love you so much! Endlessly thankful for you.",
+    "photos": []
+  },
+  {
+    "name": "Debby Lottinville",
+    "relation": "family / aunt",
+    "note": "Robin was a hit with me from the first. She exudes warmth, kindness and love. Over the years I have witnessed how wonderful she is with Aaron and he with her. Seeing a solid marriage in action is a lovely thing to witness. But then I see why Aaron fell in love with her. I have witnessed what a loving mother you are. I guess that’s what comes to mind how kind and loving you are.\r\nYou also have a great enthusiasm for life! You have various interests and passions. I see that with your love of your pets too.\r\nI’m not the best with words but I will say that I’m so glad you are in our family and I wish you all the best now and in the coming years! \r\nHappy Birthday and I love how you love life!❤️",
+    "photos": []
+  },
+  {
+    "name": "Eric Hochstein",
+    "relation": "",
+    "note": "Stealing the words of Chris Rock here: \"All you should be doing is fuckin' and goin' places.\"  Here's to the next 60.",
+    "photos": []
+  },
+  {
+    "name": "Anke Hansen",
+    "relation": "One of the lovely one‘s from Omaha - Tevra family",
+    "note": "Robin, spending time with you is always a pleasure. We’ve shared so many wonderful moments together in Las Vegas, Omaha, Kennebunkport, and Positano 🇮🇹.\r\nYou’re such a helpful and friendly person who’s always there for your friends. You’re bursting with energy and creativity.\r\nI especially remember the summer when you taught me how to play backgammon. Every time I play, I think of you and am so happy ❤️ that I got to meet you.\r\nYou’re so much fun, and I hope for lots more Robin time.\r\nHappy Birthday, my dear\r\nCheers to you!",
+    "photos": [
+      "Anke_Hansen_01.jpg",
+      "Anke_Hansen_02.jpg",
+      "Anke_Hansen_03.jpg"
+    ]
+  },
+  {
+    "name": "Olaf Hansen",
+    "relation": "friend",
+    "note": "Hello Robin,\r\nyou are the better half of a man that has become one of my best friends within the last 10 years. In these 10 years I also got to know you and I consider you as my friend. You initiated a guacomole test (which you won of course) for me that I still think about. I still have my T-shirt :-)  We have always so much fun. Be it at the pool, be it at work, or be it on vacation (Positano!!!). I have never experienced that you have made someone's life difficult. You let people be who they are. You never complained about my hard German words when I could not find the appropriate words. I feel safe around you and I don't have that feeling with many people. My biggest hope is that we have more time together in the future when we are able to work a bit less. My life would be richer then.",
+    "photos": [
+      "Olaf_Hansen_01.jpg",
+      "Olaf_Hansen_02.jpg",
+      "Olaf_Hansen_03.jpg"
+    ]
+  },
+  {
+    "name": "Fotis",
+    "relation": "We are friends from Crete",
+    "note": "I wish you, all the best and many greetings to your family! You and your family you was very kind to me ! All love! Respect!",
+    "photos": [
+      "Fotis_01.jpg"
+    ]
+  },
+  {
+    "name": "Tre Brashear",
+    "relation": "friend",
+    "note": "Robin is one of those rare people who actually lives life instead of just talking about it. She brings energy, curiosity, adventure, and fun into everything she does. Whether it’s traveling the world, finding the next great restaurant, talking about astrology and vortexes, doing Pilates, or singing along in a honky-tonk in Nashville, time with Robin is always memorable.\r\n\r\nWhat Kari and I love most is that underneath all the fun is someone who is deeply caring, loyal, and present for the people she loves. She’s a wonderful mom, a great friend, and genuinely joyful company. People feel better after spending time with her.\r\n\r\nWe feel lucky to call Robin one of our closest friends and can’t wait to see what adventures she creates in this next chapter. Happy 60th, Robin. We love you.”",
+    "photos": [
+      "Tre_Brashear_01.jpg",
+      "Tre_Brashear_02.jpg"
+    ]
+  },
+  {
+    "name": "Kari Brashear",
+    "relation": "Friend",
+    "note": "You were a kind and unassuming face when I first started coming around and you were interested in me, not how I was joining the crew and that meant the world. Your measured approach to all the other worldly things we both believe was immediately intriguing and I knew that you and I saw the world through a similar prism. You are the best of so many things, equal parts adventurous, curious, kind, grounded and just the right amount of spiritually awakened. I love that you have turned your passion for traveling into a business because you have been the catalyst for many a person’s travel envy. But by far, what I love the most about you is that I have never seen you act differently or treat someone differently based on societal trappings. And that is rare. Keep on being one in a million.",
+    "photos": [
+      "Kari_Brashear_01.jpg"
+    ]
+  },
+  {
+    "name": "Jerry Zakaras",
+    "relation": "Friend",
+    "note": "Robin, you’re 60 already?? Seems like just yesterday we were at your first wine party right after Zachary was born! Thanks for getting those fun gatherings started, our little group enjoyed years of incredible “wine themes”! Bringing people together is one of your greatest attributes, Robin, and all of us lucky enough to know you are grateful for your friendship. Have a wonderful birthday, and cheers to many more!🍷\r\nJerry",
+    "photos": []
+  },
+  {
+    "name": "Debbie Zakaras",
+    "relation": "friend",
+    "note": "Happy 60th birthday Robin!!! You are such a gift to all of us who know you and love you! I’ve never seen you without a smile on your face, you embody kindness and grace. You’re gentle yet brave, always surprising us with your latest endeavor, from hang gliding to dancing to flying on a trapeze, I truly admire your constant thirst for excitement and adventure. I know that your next chapter in life will be full of more amazing experiences! You sure know how to have fun!! Love you so much!!\r\nDebbie",
+    "photos": []
+  },
+  {
+    "name": "Kimberly Bailey",
+    "relation": "Friend in Omaha",
+    "note": "Robin’s warmth is one-of-a-kind. Not matter where you run into her or get the chance to spend time with her (whether for a quick hug in the grocery store or out to an event or for happy hour and dinner) her warmth and positivity make you feel like you’re the most important person to her. I admire her curiosity, gratitude, generosity, creativity, and the way she shows up for her family and friends.",
+    "photos": []
+  },
+  {
+    "name": "Becky App",
+    "relation": "friend",
+    "note": "Happy 60th Birthday, Robin!\r\nI always love spending time with you, whether we're at a MAHA concert, line dancing our way through Nashville, enjoying a great dinner, or hearing about your latest adventure somewhere around the world. You always have a way of making every experience with you feel warm and welcoming. Your kindness and positivity  are always glowing. \r\n\r\nAs you celebrate this big birthday, I hope the year ahead is filled with happiness, laughter, amazing travels, and new adventures. You deserve every bit of it!\r\n\r\nHappy Birthday, Robin! I can't wait to see where your next adventure takes you.\r\n\r\n❤️ Becky",
+    "photos": [
+      "Becky_App_01.jpg",
+      "Becky_App_02.jpg"
+    ]
+  },
+  {
+    "name": "Jaime Allgood",
+    "relation": "Friend",
+    "note": "Happy birthday Robin!  You are an amazing person and I absolutely love your adventurous spirit and fun loving attitude.  My face always hurts from laughing after we get together.  Sending you love and hugs and best wishes for an amazing birthday!!",
+    "photos": [
+      "Jaime_Allgood_01.jpg"
+    ]
+  },
+  {
+    "name": "Leslie Spethman",
+    "relation": "Maha!",
+    "note": "Dearest Robin- \r\nYou are one of those people who just feels good to be around! From our Maha memories, to our gloriously awesome Dance Off video and stint as local celebrities supporting YES together, to our good times in the warehouse at Pet Friendly- and of course, all the special milestones you've been there to help me celebrate- I've got so many fond memories of time spent with you! I've always felt an extra special connection to you. I know the universe knew we should be friends- and made sure our paths would cross! I'm truly grateful to call you my friend and I hope you know how special you are to me. Wishing you love, joy, peace, and all the happiness you deserve as you enter your sixth decade! \r\nLove and big hugs always, \r\nLeslie",
+    "photos": [
+      "Leslie_Spethman_01.jpg",
+      "Leslie_Spethman_02.jpg"
+    ]
+  },
+  {
+    "name": "Randy and Gerri Baxter",
+    "relation": "Coworkers to friends",
+    "note": "Robin, happy 60th birthday to one of the sweetest and kindest girls!  We love all the memories with you which usually involve great food and of coarse great cocktails.  We will never forget the paella night and dancing in your living room after a few sangrias and waiting patiently for the food to be done.  I hope your year is full of travel, fun, relaxation, connecting and experiencing all life has to offer.  We love you girl, Randy and Gerri",
+    "photos": [
+      "Randy_and_Gerri_Baxter_01.png",
+      "Randy_and_Gerri_Baxter_02.png"
+    ]
+  },
+  {
+    "name": "Tracy Isenberg",
+    "relation": "Friend First/Work",
+    "note": "Robin, you have been a steady source of kindness, strength, and quiet encouragement during some of the most difficult chapters of my life. From the moment we met, you created a space where I felt comfortable being completely myself, and your friendship has shown me what genuine care and generosity look like. My wish for your next chapter is that you experience the same joy, adventure, and love that you so naturally give to everyone around you.",
+    "photos": [
+      "Tracy_Isenberg_01.jpg"
+    ]
+  },
+  {
+    "name": "Donna King",
+    "relation": "work/friend/coachee",
+    "note": "It’s been 20 years since I moved to Omaha to start at Oriental Trading and had the good fortune of meeting you. From day one, you welcomed me with open arms and became so much more than a trusted colleague—you became a true friend. You were the calm in every storm (including my first lessons on tornado season!), always steady, reliable, creative, and kind. Your empathy and quiet strength helped me adjust to a new role and home in the Midwest. I’m grateful to have been part of your journey as I’ve loved watching you grow into the confident and inspiring person you are today. Seeing you trust yourself, find your voice, and embrace your gifts has been a joy. May this next chapter be filled with new experiences, meaningful moments, and all the connection, adventure, and fun you deserve.",
+    "photos": [
+      "Donna_King_01.jpg"
+    ]
+  },
+  {
+    "name": "John Henry Müller",
+    "relation": "friend",
+    "note": "Robin is pure joy. Chances are you heard her giggling before you ever walked into the room. And the moment she sees you, there's the smile, the sparkle in her eye, the warm greeting that lands like you're the one person she was hoping to run into.\r\n\r\nThat's the thing about Robin. She doesn't just light up a room. She makes everyone in it feel a little more known. She remembers what you said three weeks ago. She catches the look on your face before you've even said anything. She laughs at your jokes, especially the ones that probably weren't that funny.\r\nSixty years of that kind of presence is a gift to everyone lucky enough to be around it. Here's to many more.",
+    "photos": [
+      "John_Henry_M_ller_01.jpg",
+      "John_Henry_M_ller_02.jpg"
+    ]
+  },
+  {
+    "name": "Jim Helwig",
+    "relation": "Sister-in-Law",
+    "note": "Happy Birthday, Robin - a special 60! My first memory of you was when we met at Terry and my wedding in Florida. We played on the floor together. (picture attached) Since then your constant smile and soft voice have radiated wherever you are. One other trait I will always remember is your hair flip, which you are known for. Best of success in achieving your vision for the next half century.",
+    "photos": [
+      "Jim_Helwig_01.jpg",
+      "Jim_Helwig_02.jpg"
+    ]
+  },
+  {
+    "name": "Terry Helwig",
+    "relation": "sister",
+    "note": "Robin, I fell in love with you the first day we met fifty-seven years ago.. It has been a delight to watch you grow up. You have impressed me in so many ways—your determination to go to college, never giving up on your dreams, and your ability to bring sunshine into any room you enter. You are a wonderful mother, a loving wife, and one terrific sister. I love your smile, your big heart, and your easy laugh. I treasure all the moments we have been blessed to share—you have brightened my life beyond measure. Happy Birthday, Sis. Love you, Terry",
+    "photos": [
+      "Terry_Helwig_01.jpg",
+      "Terry_Helwig_02.jpg",
+      "Terry_Helwig_03.jpg"
+    ]
+  },
+  {
+    "name": "Vicki Lee Hess",
+    "relation": "My sister, forever and always ❣️",
+    "note": "I can still see your sweet little face, when dad and your mother came to visit us, it was the first time we meet in person. I loved your caring heart, even at six, you had a concern for me, and asked me not to smoke, as your brother died of cancer. My heart broke for you and for me and I did quit smoking! I didn’t get to see you again until Gary and I came to visit after Damen and Mandy were born and you loved being auntie, we had so much fun together and you were already talking about running your own business and maybe we could start a gyros sandwich shop! I’m Thankful for you and every memory, Gary and I love you so very much sister. Welcome to 60❣️",
+    "photos": [
+      "Vicki_Lee_Hess_01.jpg",
+      "Vicki_Lee_Hess_02.jpg",
+      "Vicki_Lee_Hess_03.jpg"
+    ]
+  },
+  {
+    "name": "Kyle Ofe",
+    "relation": "She’s my momma",
+    "note": "Mom, we’ve been together 30 years, traveling, sharing stories, laughs, and meals. I look forward to sharing many more. Having you in my life is a blessing.  I love you!",
+    "photos": [
+      "Kyle_Ofe_01.jpg",
+      "Kyle_Ofe_02.jpg"
+    ]
+  },
+  {
+    "name": "Allison Ashford",
+    "relation": "Omaha Fashion Week and just life",
+    "note": "To my dear friend on a milestone birthday. Thank you for your grace, wisdom, steadiness and beauty. This world is better because of you. (Remember this night? Being photobombed by John??)\n\nRobin means joy. When I think of her or see a picture of her, I hear her laugh. I am so lucky to know her, and I hope that this year brings as much joy and sunshine to you as you do to others. Much love.",
+    "photos": [
+      "Allison_Ashford_01.jpg"
+    ]
+  },
+  {
+    "name": "Kacy Hansen",
+    "relation": "sister by choice",
+    "note": "The honor to write about Robin has also been a journey of self reflection. Thinking about the story of Eat Pray Love, and the sentence that's always stayed with me. That \"ruin is a gift. Ruin is the road to transformation.\" And having known Robin for almost half my life and having experienced with her a variety of journeys and roads I have seen and felt and experienced and observed what it means to succeed only after periods of ruin. The growth. The heartbreak. The rewards.\n\nShe was the first one to tell me that we were sisters. No one had ever said that to me before and I think I should have been taken aback like \"what the hell is she talking about?\" I didn't. In fact I felt it at my core. But I didn't disagree. I know that she and I have been friends, sisters, mother, and daughter in several lifetimes. And in this one we've had to share similar journeys, which is why I think being with her is effortless.\n\nLoving until we cry. Laughing until our stomach hurts. Always easy. Never left confused about what our friendship means. Not even after having not lived together in the same city for 20+ years.\n\nShe once told me about being a limo driver, and I could totally picture her in a top hat. A dancer on stage doing high kicks, even if she never did. Anything she says she wish she had done — I know she's done in a different lifetime. And always in pursuit of more understanding.\n\nShe's truly a fierce friend that shows up for anyone that she loves. And I am blessed that I'm a part of her circle.",
+    "photos": []
+  }
+];
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function noteToHtml(note) {
+      const cleaned = note.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      const paragraphs = cleaned.split(/\n\n+/);
+      return paragraphs
+        .map(p => p.trim())
+        .filter(Boolean)
+        .map(p => '<p>' + escapeHtml(p).replace(/\n/g, '<br>') + '</p>')
+        .join('');
+    }
+
+    function renderVoices() {
+      const container = document.getElementById('voicesContainer');
+      const shuffled = shuffle(VOICES);
+      const html = shuffled.map(v => {
+        const photosHtml = (v.photos && v.photos.length > 0)
+          ? `<div class="voice-photos">${v.photos.map(p =>
+              `<img src="photos/${p}" alt="" loading="lazy" onclick="openLightbox(this.src)">`
+            ).join('')}</div>`
+          : '';
+
+        const relationHtml = v.relation
+          ? `<div class="voice-relation">${escapeHtml(v.relation)}</div>`
+          : '';
+
+        return `
+          <article class="voice">
+            <header class="voice-header">
+              <h2 class="voice-name">${escapeHtml(v.name)}</h2>
+              ${relationHtml}
+            </header>
+            <div class="voice-body">
+              ${noteToHtml(v.note)}
+            </div>
+            ${photosHtml}
+          </article>
+        `;
+      }).join('');
+      container.innerHTML = html;
+    }
+
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightboxImg').src = src;
+      lb.classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    renderVoices();
+  </script>
+</body>
+</html>
