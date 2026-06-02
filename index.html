@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #0e0b08;
       --bg-card: rgba(20,16,12,0.55);
@@ -22,297 +21,112 @@
       --cream-mid: rgba(250,246,238,0.60);
       --cream-dim: rgba(250,246,238,0.35);
     }
-
     html, body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
+      background: var(--bg); color: var(--cream);
+      font-family: 'Lato', sans-serif; font-weight: 300;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
     a { color: var(--gold); text-decoration: none; transition: color 0.3s ease; }
     a:hover { color: var(--cream); }
-
     .frame {
       position: fixed; inset: 24px; z-index: 50;
       border: 1px solid var(--gold-faint); pointer-events: none;
     }
-    .frame::after {
-      content: ''; position: absolute; inset: 5px;
-      border: 1px solid var(--gold-trace);
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 70px 48px 120px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 60px 0 70px;
-    }
+    .frame::after { content: ''; position: absolute; inset: 5px; border: 1px solid var(--gold-trace); }
+    .container { max-width: 1180px; margin: 0 auto; padding: 70px 48px 120px; position: relative; z-index: 10; }
+    .hero { text-align: center; padding: 60px 0 70px; }
     .eyebrow {
       font-family: 'Lato', sans-serif;
       font-size: clamp(0.62rem, 1.5vw, 0.76rem);
       font-weight: 300; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.4rem;
+      color: var(--gold); margin-bottom: 1.4rem;
     }
     .hero-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 900;
-      font-size: clamp(3.5rem, 11vw, 8rem);
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      color: var(--cream);
+      font-family: 'Playfair Display', Georgia, serif; font-weight: 900;
+      font-size: clamp(3.5rem, 11vw, 8rem); line-height: 0.95;
+      letter-spacing: -0.02em; color: var(--cream);
     }
     .hero-title .sixty {
-      display: block;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--gold);
-      font-size: clamp(2.2rem, 6.5vw, 4.5rem);
-      margin-top: 0.15em;
-      letter-spacing: 0;
+      display: block; font-style: italic; font-weight: 400; color: var(--gold);
+      font-size: clamp(2.2rem, 6.5vw, 4.5rem); margin-top: 0.15em; letter-spacing: 0;
     }
-
-    .rule {
-      display: flex; align-items: center; gap: 0.9rem;
-      margin: 2.2rem auto 1.8rem; width: min(340px, 78vw);
-    }
-    .rule-line {
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
-    }
-    .rule-diamond {
-      width: 5px; height: 5px; background: var(--gold);
-      transform: rotate(45deg); flex-shrink: 0;
-    }
-
+    .rule { display: flex; align-items: center; gap: 0.9rem; margin: 2.2rem auto 1.8rem; width: min(340px, 78vw); }
+    .rule-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
+    .rule-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
     .hero-meta {
-      font-family: 'Lato', sans-serif;
-      font-size: clamp(0.72rem, 1.6vw, 0.85rem);
+      font-family: 'Lato', sans-serif; font-size: clamp(0.72rem, 1.6vw, 0.85rem);
       font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--cream-mid);
-      line-height: 1.9;
+      color: var(--cream-mid); line-height: 1.9;
     }
     .hero-meta strong { color: var(--cream-soft); font-weight: 400; }
-
-    .intro {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 30px 0 0;
-      text-align: center;
-    }
+    .intro { max-width: 640px; margin: 0 auto; padding: 30px 0 0; text-align: center; }
     .intro p {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      line-height: 1.7;
-      color: var(--cream-soft);
-      margin-bottom: 1.1rem;
+      font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400;
+      font-size: clamp(1.05rem, 2vw, 1.25rem); line-height: 1.7;
+      color: var(--cream-soft); margin-bottom: 1.1rem;
     }
-    .intro p:last-child {
-      font-family: 'Lato', sans-serif;
-      font-style: normal;
-      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-      color: var(--cream-mid);
-    }
-
-    .add-voice {
-      text-align: center;
-      margin: 55px 0 25px;
-    }
-    .add-voice-link {
-      display: inline-block;
-      padding: 14px 36px;
-      font-family: 'Lato', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--gold-dim);
-      transition: all 0.4s ease;
-    }
-    .add-voice-link:hover {
-      color: var(--bg);
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-    .add-voice-link .arrow {
-      display: inline-block;
-      margin-left: 0.8rem;
-      transition: transform 0.4s ease;
-    }
-    .add-voice-link:hover .arrow {
-      transform: translateX(4px);
-    }
-
-    .section-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1.5rem;
-      margin: 70px auto 50px;
-      max-width: 600px;
-    }
-    .section-divider .line {
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
-    }
+    .section-divider { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin: 70px auto 50px; max-width: 600px; }
+    .section-divider .line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold-dim), transparent); }
     .section-divider .label {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.7rem; font-weight: 300;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold);
-      white-space: nowrap;
+      font-family: 'Lato', sans-serif; font-size: 0.7rem; font-weight: 300;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); white-space: nowrap;
     }
-
-    .voices {
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
-    }
-
-    .voice {
-      background: var(--bg-card);
-      border: 1px solid var(--gold-trace);
-      padding: 48px;
-      position: relative;
-      transition: border-color 0.6s ease;
-    }
-    .voice:hover {
-      border-color: var(--gold-faint);
-    }
-
-    .voice-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.8rem;
-      padding-bottom: 1.4rem;
-      border-bottom: 1px solid var(--gold-trace);
-    }
-
+    .voices { display: flex; flex-direction: column; gap: 60px; }
+    .voice { background: var(--bg-card); border: 1px solid var(--gold-trace); padding: 48px; position: relative; transition: border-color 0.6s ease; }
+    .voice:hover { border-color: var(--gold-faint); }
+    .voice-header { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.8rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--gold-trace); }
     .voice-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(1.5rem, 2.6vw, 1.85rem);
-      color: var(--cream);
-      letter-spacing: -0.01em;
-      line-height: 1.2;
+      font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+      font-size: clamp(1.5rem, 2.6vw, 1.85rem); color: var(--cream);
+      letter-spacing: -0.01em; line-height: 1.2;
     }
-
     .voice-relation {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-      color: var(--gold);
+      font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 400;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem); color: var(--gold);
     }
     .voice-relation::before { content: "· "; color: var(--gold-dim); margin-right: 0.2rem; }
-
     .voice-body {
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1rem, 1.5vw, 1.08rem);
-      line-height: 1.85;
-      color: var(--cream-soft);
+      font-family: 'Lato', sans-serif; font-weight: 300;
+      font-size: clamp(1rem, 1.5vw, 1.08rem); line-height: 1.85; color: var(--cream-soft);
     }
     .voice-body p { margin-bottom: 1.1rem; }
     .voice-body p:last-child { margin-bottom: 0; }
-
-    .voice-photos {
-      margin-top: 1.8rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-    }
+    .voice-photos { margin-top: 1.8rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
     .voice-photos img {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
+      width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
       filter: saturate(0.92) brightness(0.92);
-      transition: filter 0.5s ease, transform 0.6s ease;
-      cursor: pointer;
+      transition: filter 0.5s ease, transform 0.6s ease; cursor: pointer;
     }
-    .voice-photos img:hover {
-      filter: saturate(1.05) brightness(1.02);
-      transform: scale(1.015);
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(8, 6, 4, 0.94);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      cursor: zoom-out;
-    }
+    .voice-photos img:hover { filter: saturate(1.05) brightness(1.02); transform: scale(1.015); }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(8, 6, 4, 0.94); z-index: 200; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
     .lightbox.active { display: flex; }
-    .lightbox img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 100px;
-      padding-top: 50px;
-      border-top: 1px solid var(--gold-trace);
-    }
+    .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+    .footer { text-align: center; margin-top: 100px; padding-top: 50px; border-top: 1px solid var(--gold-trace); }
     .footer .rule { margin: 0 auto 2rem; }
     .footer p {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 300;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-      margin-bottom: 0.8rem;
+      font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 300;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 0.8rem;
     }
     .footer p.signature {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic;
-      font-size: 1.05rem;
-      font-weight: 400;
-      letter-spacing: 0;
-      text-transform: none;
-      color: var(--cream-mid);
+      font-family: 'Playfair Display', Georgia, serif; font-style: italic;
+      font-size: 1.05rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--cream-mid);
     }
-
     @media (max-width: 760px) {
       .frame { inset: 12px; }
       .container { padding: 50px 24px 80px; }
       .hero { padding: 30px 0 50px; }
       .voice { padding: 30px 24px; }
-      .voice-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
+      .voice-header { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
       .voice-relation::before { display: none; }
       .voice-photos { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 420px) {
-      .voice-photos { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px) { .voice-photos { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="frame" aria-hidden="true"></div>
-
   <div class="container">
     <header class="hero">
       <p class="eyebrow">A gift for Robin · June 1, 2026</p>
@@ -326,28 +140,22 @@
         <div class="rule-line"></div>
       </div>
       <p class="hero-meta">
-        <strong>66 voices</strong> from the people who love her<br>
+        <strong>68 voices</strong> from the people who love her<br>
         Gathered for her sixtieth birthday
       </p>
-
       <div class="intro">
         <p>
           Robin turned 60 on June 1, 2026. These are the words of the people who love her —
           family, friends, the ones who've known her forever and the ones she's only just met.
         </p>
       </div>
-</header>
-
+    </header>
     <div class="section-divider">
       <div class="line"></div>
       <div class="label">The Voices</div>
       <div class="line"></div>
     </div>
-
-    <main class="voices" id="voicesContainer">
-      <!-- voices rendered by JS -->
-    </main>
-
+    <main class="voices" id="voicesContainer"></main>
     <footer class="footer">
       <div class="rule">
         <div class="rule-line"></div>
@@ -358,13 +166,23 @@
       <p style="margin-top: 2rem;">Robin's 60th · June 1, 2026</p>
     </footer>
   </div>
-
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <img id="lightboxImg" src="" alt="">
   </div>
-
   <script>
     const VOICES = [
+  {
+    "name": "Animal",
+    "relation": "Aaron",
+    "note": "Happy birthday!",
+    "photos": []
+  },
+  {
+    "name": "Denise and Jon Meyers",
+    "relation": "From Business and Philanthropy",
+    "note": "Robin, Denise and I wish you a VERY happy SIXTYIETH Birthday.   We first maet you many years ago at the then Teddy Bear Comfort Food Classic.   We had put up for acution a day at our Lake House and you and Aaron were extremely generous bidding on and winning that.   Didn't know then that it would turn into a relationship that has included getting together, housing your offices and products for you and even investing in your company.   You never know where life's twists and turns will take you.\r\nAll the best, Denise and Jon Meyers",
+    "photos": []
+  },
   {
     "name": "Andrew and Angie Norman",
     "relation": "Family friends",
@@ -664,8 +482,8 @@
     "relation": "friend",
     "note": "Happy 60th to Robin — the woman who, at 3am in a NYC Korean BBQ joint, calmly helped spoon-feed my wife Kendal like it was the most normal thing in the world. That's not friendship. That's sainthood. Here's to 60 more years of taking care of the rest of us.",
     "photos": [
-      "Trevor_Kendal_Davis_01.png",
-      "Trevor_Kendal_Davis_02.png"
+      "Trevor_Kendal_Davis_01.jpg",
+      "Trevor_Kendal_Davis_02.jpg"
     ]
   },
   {
@@ -790,8 +608,8 @@
     "relation": "Coworkers to friends",
     "note": "Robin, happy 60th birthday to one of the sweetest and kindest girls!  We love all the memories with you which usually involve great food and of coarse great cocktails.  We will never forget the paella night and dancing in your living room after a few sangrias and waiting patiently for the food to be done.  I hope your year is full of travel, fun, relaxation, connecting and experiencing all life has to offer.  We love you girl, Randy and Gerri",
     "photos": [
-      "Randy_and_Gerri_Baxter_01.png",
-      "Randy_and_Gerri_Baxter_02.png"
+      "Randy_and_Gerri_Baxter_01.jpg",
+      "Randy_and_Gerri_Baxter_02.jpg"
     ]
   },
   {
@@ -872,7 +690,6 @@
     "photos": []
   }
 ];
-
     function shuffle(arr) {
       const a = [...arr];
       for (let i = a.length - 1; i > 0; i--) {
@@ -881,68 +698,41 @@
       }
       return a;
     }
-
     function escapeHtml(s) {
-      return s
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-
     function noteToHtml(note) {
       const cleaned = note.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
       const paragraphs = cleaned.split(/\n\n+/);
-      return paragraphs
-        .map(p => p.trim())
-        .filter(Boolean)
-        .map(p => '<p>' + escapeHtml(p).replace(/\n/g, '<br>') + '</p>')
-        .join('');
+      return paragraphs.map(p => p.trim()).filter(Boolean)
+        .map(p => '<p>' + escapeHtml(p).replace(/\n/g, '<br>') + '</p>').join('');
     }
-
     function renderVoices() {
       const container = document.getElementById('voicesContainer');
       const shuffled = shuffle(VOICES);
-      const html = shuffled.map(v => {
+      container.innerHTML = shuffled.map(v => {
         const photosHtml = (v.photos && v.photos.length > 0)
           ? `<div class="voice-photos">${v.photos.map(p =>
               `<img src="photos/${p}" alt="" loading="lazy" onclick="openLightbox(this.src)">`
-            ).join('')}</div>`
-          : '';
-
-        const relationHtml = v.relation
-          ? `<div class="voice-relation">${escapeHtml(v.relation)}</div>`
-          : '';
-
-        return `
-          <article class="voice">
+            ).join('')}</div>` : '';
+        const relationHtml = v.relation ? `<div class="voice-relation">${escapeHtml(v.relation)}</div>` : '';
+        return `<article class="voice">
             <header class="voice-header">
               <h2 class="voice-name">${escapeHtml(v.name)}</h2>
               ${relationHtml}
             </header>
-            <div class="voice-body">
-              ${noteToHtml(v.note)}
-            </div>
+            <div class="voice-body">${noteToHtml(v.note)}</div>
             ${photosHtml}
-          </article>
-        `;
+          </article>`;
       }).join('');
-      container.innerHTML = html;
     }
-
     function openLightbox(src) {
-      const lb = document.getElementById('lightbox');
       document.getElementById('lightboxImg').src = src;
-      lb.classList.add('active');
+      document.getElementById('lightbox').classList.add('active');
     }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-    }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
-    });
-
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
     renderVoices();
   </script>
 </body>
